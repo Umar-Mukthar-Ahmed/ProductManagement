@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Repository.Models;
+using Shared.Paging;
 
 namespace Repository.Products
 {
@@ -15,9 +16,11 @@ namespace Repository.Products
 
         public void UpdateProduct(Product product) => Update(product);
 
-        public async Task<IEnumerable<Product>> GetAllProductsAsync() =>
+        public async Task<IEnumerable<Product>> GetAllProductsAsync(RequestParameter requestParameter) =>
             await FindAll()
             .OrderBy(x => x.Title)
+            .Skip((requestParameter.PageNumber - 1) * requestParameter.PageSize)
+            .Take(requestParameter.PageSize)
             .ToListAsync();
 
         public async Task<Product> GetProductByIdAsync(Guid productGuid) => await FindByCondition(x => x.ProductGuid == productGuid).FirstOrDefaultAsync();

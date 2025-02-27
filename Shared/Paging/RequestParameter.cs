@@ -15,7 +15,7 @@
             }
             set
             {
-                _pageSize = value > maxPageSize ? _pageSize : value;
+                _pageSize = value > maxPageSize ? maxPageSize : value;
             }
         }
     }

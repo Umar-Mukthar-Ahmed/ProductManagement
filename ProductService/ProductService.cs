@@ -93,7 +93,7 @@ namespace Services
         {
             try
             {
-                var products = await _repositoryManager.Product.GetAllProductsAsync();
+                var products = await _repositoryManager.Product.GetAllProductsAsync(requestParameter);
 
                 if (products == null)
                     return null;
